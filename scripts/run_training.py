@@ -22,7 +22,9 @@ trainer = Trainer(x_i.shape[1],
                   config.FUN_ACT,
                   config.LEARNING_RATE,
                   config.BATCH,
-                  config.EPOCHS)
+                  config.EPOCHS,
+                  config.EPSILON,
+                  config.PATIENCE)
 
 # Avvia training
 trainer.train(x_i, d)

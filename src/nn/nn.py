@@ -73,23 +73,10 @@ class NN:
         self.n_outputs = n_outputs  
         self.f_act = f_act          # Legata agli hidden layer
         self.learning_rate = learning_rate
-
-
-        
-        #std_dev = np.sqrt(2 / n_inputs)
-        #self.w_j1i = np.random.normal(0, std_dev, size=(self.n_inputs, n_hidden1))
-
-        #std_dev = np.sqrt(2 / n_hidden1)
-        #self.w_j2j1 = np.random.normal(0, std_dev, size=(n_hidden1, n_hidden2))
-
-        #std_dev = np.sqrt(2 / n_hidden2)
-        #self.w_kj2 = np.random.normal(0, std_dev, size=(n_hidden2, n_outputs))
-        
         
         self.w_j1i = np.random.randn(self.n_inputs, n_hidden1) * np.sqrt(2.0 / n_inputs)
         self.w_j2j1 = np.random.randn(n_hidden1, n_hidden2) * np.sqrt(2.0 / n_hidden1)
         self.w_kj2 = np.random.randn(n_hidden2, n_outputs) * np.sqrt(2.0 / n_hidden2)
-        
 
         self.w_j1i = add_bias(self.w_j1i)
         self.w_j2j1 = add_bias(self.w_j2j1)

@@ -1,4 +1,5 @@
 import numpy as np
+import math as math
 from typing import Callable
 
 
@@ -107,4 +108,9 @@ def compute_delta_all_layers(d: Array1D, x_k: Array1D, w_kj2: Array2D,
     dj1 = delta_j(w_j1i, x_i, w_j2j1, dj2, fd)
     delta_wj1i = compute_delta_weights(dj1, x_i)
     
-    return delta_wk, delta_wj2j1, delta_wj1i 
+    return delta_wk, delta_wj2j1, delta_wj1i, gradient_norm(dk, dj2, dj1)
+
+def gradient_norm(dk, dj2, dj1):
+
+    d_all = np.concatenate([dk, dj2, dj1])
+    return math.sqrt(np.sum(d_all ** 2))
