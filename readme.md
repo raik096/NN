@@ -1,129 +1,38 @@
 # Neural Network – Training from Scratch
 
-Questo progetto implementa una **rete neurale feed-forward** sviluppata interamente da zero in Python, con l’obiettivo di comprendere a fondo il funzionamento di:
+[cite_start]This project implements a Multilayer Perceptron (MLP) neural network with the SGD learning algorithm from scratch in Python[cite: 10]. Built entirely without deep learning frameworks (like PyTorch or TensorFlow), this project was developed for educational and experimental purposes to deeply understand the underlying mechanics of neural networks. 
 
-- forward pass
-- backward pass
-- funzioni di attivazione e loro derivate
-- aggiornamento dei pesi tramite gradient descent
+[cite_start]The performance of the simulator was rigorously evaluated using the MONK datasets (1, 2, and 3) as well as the CUP dataset provided by Prof. Micheli[cite: 11]. 
 
-Il progetto è pensato a scopo **didattico e sperimentale**. Il progetto **non utilizza framework di deep learning** (come PyTorch o TensorFlow). Tutte le operazioni (forward, backward, update dei pesi) sono implementate manualmente.
+[cite_start]A comprehensive analysis of the project, authored by Andres Lazzari and Leonardo Elmi from the Università di Pisa[cite: 3, 5, 6], can be found in the attached technical report (`ML_Elmi_Lazzari.pdf`).
 
 ---
 
-## Requisiti
+## 🚀 Key Features
 
-Prima di avviare il progetto, assicurarsi di avere:
+[cite_start]The project features a modular architecture designed to handle both classification and regression tasks[cite: 32]. All operations (forward pass, backward pass, weight updates) are implemented manually.
 
-- Python ≥ 3.9
-- un ambiente virtuale attivo (consigliato)
+* [cite_start]**Architecture Flexibility:** Configurable hidden and output layers[cite: 45].
+* [cite_start]**Activation Functions:** Support for Sigmoid, ReLU, Leaky ReLU, and Tanh[cite: 45].
+* [cite_start]**Weight Initialization:** Utilizes uniform He initialization for ReLU and Leaky ReLU, and uniform Glorot for Sigmoid and Tanh[cite: 48].
+* [cite_start]**Learning Strategies:** Capability to seamlessly switch among online, batch, and minibatch learning[cite: 46].
+* **Optimization Techniques:**
+    * [cite_start]Momentum to add inertia to weight updates[cite: 46].
+    * [cite_start]Rudimental learning rate decay proportional to epochs[cite: 46].
+    * [cite_start]L2 regularization[cite: 47].
+    * [cite_start]Early Stopping with predefined patience thresholds[cite: 47].
+* [cite_start]**Validation:** Supports grid search with K-fold cross-validation and stratified hold-out methodologies[cite: 52, 53].
 
-Installare le librerie necessarie con:
+---
+
+## 🛠️ Requirements
+
+Before running the project, ensure you have:
+
+* Python ≥ 3.9
+* An active virtual environment (recommended)
+
+Install the necessary libraries via:
 
 ```bash
-pip install -r requirements.txt # (da fare)
-```
-
----
-
-## Configurazione della rete neurale
-
-La configurazione principale della rete è contenuta nel file:
-
-```text
-config.py
-```
-
-Tutti i parametri modificabili (path, dimensioni dei layer, funzione di attivazione, iperparametri di training) sono definiti lì, in modo da evitare valori hard-coded nel codice.
-
----
-
-### 📁 Path dei dati
-
-```python
-# ======== PATHS DATA ========
-PATH_DT = "data/training_data/ML-CUP25-TR.csv"
-```
-
-- Il path è **relativo alla root del progetto**.
-- Attualmente è previsto un unico training set, ma la struttura è pensata per supportare in futuro più dataset (validation / test).
-
----
-
-### 🧠 Dimensione dei layer
-
-```python
-# ======== UNITS SIZE ========
-# Hidden layers (attualmente supportati: 2)
-N_HIDDENL1 = 64
-N_HIDDENL2 = 32
-N_OUTPUTS = 4
-```
-
-- La rete utilizza attualmente **due hidden layer**.
-- Il numero di neuroni per layer è configurabile.
-- È prevista un’evoluzione verso una gestione più flessibile ad esempio tramite lista di layer
-
----
-
-### ⚡ Funzione di attivazione
-
-```python
-# ======= ACTIVATION FUNCTION =======
-FUN_ACT = relu
-```
-
-- La funzione di attivazione è applicata **a tutti gli hidden layer**.
-- `FUN_ACT` è una funzione che implementa **sia l’attivazione che la derivata**.
-- Firma attesa:
-
-```python
-def activation(x, derivative: bool = False):
-    ...
-```
-
-- Se `derivative=False`, la funzione restituisce l’attivazione.
-- Se `derivative=True`, restituisce la derivata della funzione.
-
-La funzione `relu` è definita nel modulo dedicato alle funzioni di attivazione (es. `activations.py`).
-
----
-
-### 📉 Learning rate
-
-```python
-# ====== LEARNING RATE =======
-LEARNING_RATE = 0.000025
-```
-
-- Il learning rate è volutamente basso per la **stabilità del training online**
-
----
-
-### 🔁 Numero di epoche
-
-```python
-# ======== N EPOCHS ==========
-EPOCHS = 1500
-```
-
-- Numero totale di epoche di training.
-
----
-
-## Avvio del training
-
-Per avviare il training:
-
-1. Spostarsi nella directory root del progetto
-2. Eseguire lo script come **modulo Python**
-
-```bash
-python3 -m scripts.run_training
-```
-
-L’esecuzione come modulo garantisce la corretta risoluzione degli import interni.
-
-
-Questo progetto è stato sviluppato come supporto allo studio dei concetti trattati nel corso
-*Machine Learning* dell’Università di Pisa, tenuto dal Prof. Alessio Micheli.
+pip install -r requirements.txt
