@@ -224,3 +224,9 @@ def plot_errors(trainer, training_time, save_path="results/cup/plots"):
     plt.close()
 
     print(f"Grafico salvato: {fname}")
+
+
+def _generate_filename(prefix="plot"):
+    """Genera un nome file unico basato sul timestamp."""
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    return f"{prefix}_{timestamp}.png"

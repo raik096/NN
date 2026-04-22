@@ -47,6 +47,7 @@ class TrainerCup(Trainer):
         )
 
         tr_epoch_results = None
+        vl_epoch_results = None
         
         # ! AVVIO CICLO DI EPOCHE ! #
         for epoch in range(1, self.epochs + 1):
@@ -75,7 +76,7 @@ class TrainerCup(Trainer):
                     break
                     
 
-            if self.verbose and epoch % 15 == 0:
+            if self.verbose and epoch % 100 == 0:
                 print("||[CUP] epoch n° ", epoch, ", total mse error with training patterns: ", tr_epoch_results["mse_tr"], " ||")
 
         #if fold_id is not None:
@@ -84,8 +85,12 @@ class TrainerCup(Trainer):
             self.trigger_epoch = self.epochs
 
         if self.verbose: 
-            print(" Final mee error: ", tr_epoch_results["mee_tr"])
-            print(" Final mse error: ", tr_epoch_results["mse_tr"])
+            if self.validation and vl_epoch_results is not None:
+                print(" Final VL mee: ", vl_epoch_results["mee_vl"])
+                print(" Final VL mse: ", vl_epoch_results["mse_vl"])
+        
+            print(" Final TR mee error: ", tr_epoch_results["mee_tr"])
+            print(" Final TR mse error: ", tr_epoch_results["mse_tr"])
             print(" Tempo di fitting: ", time.perf_counter() - start_time)
             print("\n--- Fitting Completato ---\n")
 
@@ -111,8 +116,12 @@ class TrainerCup(Trainer):
             vl_final_output_array.append(vl_layer_results[-1].tolist())
 
             # Calcola accuracy per monitoring
-        epoch_mee_vl = mean_euclidean_error(vl_final_output_array, vl_d)
-        epoch_mse_vl = mean_squared_error(vl_final_output_array, vl_d)
+
+        epoch_mee_vl = denorm_mean_euclidean_error(vl_final_output_array, vl_d, self.d_max, self.d_min)
+        epoch_mse_vl = denorm_mean_squared_error(vl_final_output_array, vl_d, self.d_max, self.d_min)
+
+        #epoch_mee_vl = mean_euclidean_error(vl_final_output_array, vl_d)
+        #epoch_mse_vl = mean_squared_error(vl_final_output_array, vl_d)
         vl_score = epoch_mse_vl
 
 
@@ -122,3 +131,5 @@ class TrainerCup(Trainer):
             'mse_vl': epoch_mse_vl
             #'accuracy_vl': 0.0
         }
+
+

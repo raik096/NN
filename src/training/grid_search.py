@@ -77,7 +77,7 @@ class GridSearch:
             if val_accuracy > self.best_accuracy:
                 self.best_accuracy = val_accuracy
                 self.best_config = config_dict
-                print("   ⭐️ New Best Found!")
+                print("   !!! New Best Found!")
 
             all_results_data.append({
             'params': config_dict,
@@ -102,15 +102,14 @@ class GridSearch:
             """
             Model Selection robusta: K-Fold su ogni configurazione.
             """
-            print(f"🚀 Inizio Grid Search con K-Fold (K={k_folds})...")
+            print(f"Inizio Grid Search con K-Fold (K={k_folds})...")
             all_results = [] # Lista che passeremo al plotter
             results_data = []
 
             for i, config_dict in enumerate(self.combinations):
 
-                full_config = config_dict.copy()
-                full_config['d_max'] = d_max
-                full_config['d_min'] = d_min
+                config_dict['d_max'] = d_max
+                config_dict['d_min'] = d_min
                 
                 # Chiamiamo la funzione aggiornata sopra
                 # quindi ogni configurazione * k (k_folds)
@@ -140,7 +139,7 @@ class GridSearch:
                     self.history_mean_vl_history = stats["all_vl_history_mee"]
                     self.history_mean_tr_history = stats["all_tr_history_mee"]
                     self.best_epoch = stats["epoch_reached"]
-                    print(f"   ⭐️ New Best Found!")
+                    print(f"   !!! New Best Found!")
                 
                 # --- COSTRUZIONE DATI PER IL PLOT ---
                 result_entry = {
@@ -164,49 +163,3 @@ class GridSearch:
             plot_grid_analysis_cup2(all_results, top_k=5, save_path="results/cup/grid_kfold")
 
             return self.best_config, self.best_mse, self.best_epoch, self.history_mean_tr_history, self.history_mean_vl_history
-
-
-
-"""    def run_for_cup(self, x_train, d_train, vl_input, vl_targets):
-        
-        #Metodo che si chiama dall'esterno, questo è il cuore
-        #del grid search
-        
-
-        all_results = []
-
-        for i, config_dict in enumerate(self.combinations):
-            # Qui istanziamo il Trainer usando lo spacchettamento del dizionario **
-            trainer = TrainerCup(
-                input_size=x_train.shape[1],
-                **config_dict
-            )
-
-            #  Per ogni combinazione chiama il fit
-            current_mee_tr, current_mse_tr, current_mee_vl, current_mse_vl = trainer.fit(x_train, d_train,
-                                                                                        vl_input, vl_targets)
-
-            print(f"Config {i + 1}/{len(self.combinations)} | MSE in training: {current_mse_tr:.4f}")
-            print(f"Config {i + 1}/{len(self.combinations)} | MSE in Validation: {current_mse_vl:.4f}")
-
-            if current_mse_vl < self.best_mse:
-                self.best_mse = current_mse_vl
-                self.best_config = config_dict
-
-            result_entry = {
-                'params': config_dict,
-                'tr_mse': trainer.tr_mse_history, # Lista MSE train per ogni epoca
-                'vl_mse': trainer.vl_mse_history, # Lista MSE val per ogni epoca
-                # Se volessi plottare anche il MEE in futuro, puoi salvarlo qui:
-                # 'tr_mee': trainer.tr_mee_history,
-                # 'vl_mee': trainer.vl_mee_history
-            }
-            all_results.append(result_entry)
-
-        plot_grid_analysis(
-                    all_results, 
-                    top_k_individual=5,              # Salva i dettagli delle migliori 5 configurazioni
-                    relative_path="results/cup/grid_search"
-                )
-
-        return self.best_config, self.best_mse"""
