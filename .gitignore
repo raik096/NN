@@ -39,3 +39,7 @@ wheels/
 .coverage
 htmlcov/
 
+# --- PLOTS
+*.png
+
+*.zip

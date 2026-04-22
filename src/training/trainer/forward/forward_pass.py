@@ -5,6 +5,8 @@ from typing import Callable
 Array2D = np.ndarray
 Array1D = np.ndarray
 
+
+
 def forward_hidden(x_i: Array1D, w_ji: Array2D, f_act: Callable) -> Array1D:
     """
     Calcola l'output del hidden layer con act. func. sigma con array in ingresso x_i
