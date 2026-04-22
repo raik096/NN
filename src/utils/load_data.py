@@ -4,16 +4,18 @@ import pandas as pd
 
 def load_data(path) -> tuple[pd.DataFrame, pd.DataFrame] :
 
-    df_input_layer = pd.read_csv(path, header=None, skiprows=7, usecols=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+    try:
+        df_all = pd.read_csv(path, skiprows=7, header=None)
+        df_input_layer = df_all.iloc[:, 1:13]
+        if df_all.shape[1] > 13:
+            df_output_layer = df_all.iloc[:, 13:17]
+        else:
+            df_output_layer = None
+        #print(df_input_layer, df_output_layer)
 
-    df_output_layer = pd.read_csv(path, header=None, skiprows=7, usecols=[13, 14, 15, 16])
-
-    #print(df_input_layer, df_output_layer)
-
-    return df_input_layer, df_output_layer
-
-
-import pandas as pd
+        return df_input_layer, df_output_layer
+    except Exception as e:
+            return None, None
 
 
 def load_monks_data(path) -> tuple[pd.DataFrame, pd.Series]:

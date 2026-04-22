@@ -1,0 +1,7 @@
+units_list,n_outputs,f_act_hidden,f_act_output,mini_batch_size,learning_rate,use_decay,decay_factor,decay_step,momentum,alpha_mom,lambdal2,epochs,early_stopping,epsilon,patience,max_gradient_norm,split,verbose,validation,Mean_VL_MEE,Std_VL_MEE,Mean_TR_MEE
+"[600, 300]",4,<function leaky_relu at 0x105cb0ee0>,<function linear at 0x105cb0f70>,64,0.02,True,0.95,25,True,0.9,0,5000,True,1e-07,200,100,[20],False,True,0.2887762485703012,0.008086086326576706,0.2471369024568908
+"[300, 150]",4,<function leaky_relu at 0x105cb0ee0>,<function linear at 0x105cb0f70>,64,0.02,True,0.95,25,True,0.9,0,5000,True,1e-07,200,100,[20],False,True,0.2915241649156534,0.01044447411663259,0.23833250039136877
+"[600, 300]",4,<function leaky_relu at 0x105cb0ee0>,<function linear at 0x105cb0f70>,64,0.1,True,0.95,25,True,0.9,0,5000,True,1e-07,200,100,[20],False,True,0.31696815931477357,0.010811132834812921,0.298881141333977
+"[600, 300]",4,<function leaky_relu at 0x105cb0ee0>,<function linear at 0x105cb0f70>,64,0.05,True,0.95,25,True,0.9,0,5000,True,1e-07,200,100,[20],False,True,0.3190321932218693,0.014885620114626423,0.29899276167215283
+"[300, 150]",4,<function leaky_relu at 0x105cb0ee0>,<function linear at 0x105cb0f70>,64,0.05,True,0.95,25,True,0.9,0,5000,True,1e-07,200,100,[20],False,True,0.3337194434604133,0.013247615585978036,0.31664492169715586
+"[300, 150]",4,<function leaky_relu at 0x105cb0ee0>,<function linear at 0x105cb0f70>,64,0.1,True,0.95,25,True,0.9,0,5000,True,1e-07,200,100,[20],False,True,0.3384970377122028,0.01785356345726607,0.3253467922947623

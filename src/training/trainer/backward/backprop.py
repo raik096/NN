@@ -9,9 +9,7 @@ Array1D = np.ndarray
 def delta_k(d: Array1D, x_k: Array1D, net_k: Array1D, f_act_output: Callable = None) -> Array1D:
     """
     Calcola delta per output layer.
-    
-    IMPORTANTE: Usa l'output POST-attivazione (x_k), non il net!
-    
+        
     Args:
         d: target
         x_k: output del layer (POST-attivazione)
@@ -77,9 +75,7 @@ def compute_delta_all_layers_list(
     alpha_momentum: float = 0.0,
     max_norm_gradient_for_clipping: float = 10
 ) -> tuple[List[Array2D], float]:
-    """
-    Backpropagation usando gli OUTPUT (post-attivazione) invece dei net.
-    """
+
     
     deltas_list = []
     weight_gradients_list = []

@@ -1,0 +1,4 @@
+units_list,n_outputs,f_act_hidden,f_act_output,mini_batch_size,learning_rate,use_decay,decay_factor,decay_step,momentum,alpha_mom,lambdal2,epochs,early_stopping,epsilon,patience,max_gradient_norm,split,verbose,validation,Mean_VL_MEE,Std_VL_MEE,Mean_TR_MEE
+"[300, 150]",4,<function leaky_relu at 0x10805cee0>,<function linear at 0x10805cf70>,64,0.02,True,0.95,25,True,0.9,0,5000,True,1e-07,200,100,[20],False,True,0.29441841955951514,0.007653424613249065,0.2469008389384093
+"[250, 100]",4,<function leaky_relu at 0x10805cee0>,<function linear at 0x10805cf70>,64,0.02,True,0.95,25,True,0.9,0,5000,True,1e-07,200,100,[20],False,True,0.3119142305179883,0.012033121090123342,0.2779440022485274
+"[250, 100, 50]",4,<function leaky_relu at 0x10805cee0>,<function linear at 0x10805cf70>,64,0.02,True,0.95,25,True,0.9,0,5000,True,1e-07,200,100,[20],False,True,0.32479841095131795,0.004520823051510934,0.31351158426964526

@@ -43,6 +43,8 @@ def run_k_fold_cup(x_full, d_full, k_folds, model_config, x_test_internal = None
 
     test_internal_history_output = []
 
+    epochs_reached_k_folds = []
+
 
     for i in range(k_folds):
         if verbose: print(f"--- Fold {i+1}/{k_folds} ---")
@@ -68,14 +70,14 @@ def run_k_fold_cup(x_full, d_full, k_folds, model_config, x_test_internal = None
         vl_mee_finals.append(k_trainer.vl_mee_history[-1])
         tr_mse_finals.append(k_trainer.tr_mse_history[-1])
         tr_mee_finals.append(k_trainer.tr_mee_history[-1])
-        #epochs_reached.append(len(k_trainer.tr_mse_history))
+        
+        epochs_reached_k_folds.append(k_trainer.trigger_epoch)
 
         if x_test_internal is not None:
             res, _ = k_trainer.neuraln.forward_network(x_test_internal, k_trainer.f_act_hidden, k_trainer.f_act_output)
             test_internal_history_output.append(res[-1])
     
-    
-# Restituisce direttamente le liste di liste
+    # Restituisce direttamente le liste di liste
     return {
         "vl_mean_mse": np.mean(vl_mse_finals),
         "vl_std_mse": np.std(vl_mse_finals),
@@ -92,7 +94,7 @@ def run_k_fold_cup(x_full, d_full, k_folds, model_config, x_test_internal = None
         "all_tr_history_mee": all_tr_mee_histories,
         "all_vl_history_mee": all_vl_mee_histories,
 
-        "epoch_reached": k_trainer.trigger_epoch,
+        "epoch_reached": int(np.mean(epochs_reached_k_folds)),
 
         "test_internal_history_output": test_internal_history_output
     }
